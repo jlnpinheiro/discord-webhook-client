@@ -1,5 +1,6 @@
 ﻿using JNogueira.Infraestrutura.NotifiqueMe;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JNogueira.Discord.Webhook
@@ -11,7 +12,7 @@ namespace JNogueira.Discord.Webhook
         /// Color code of the embed. You have to use Decimal numeral system, not Hexadecimal. You can use SpyColor (https://www.spycolor.com) for that. It has a decimal number converter.
         /// </summary>
         [JsonProperty("color")]
-        public int Color { get; set; }
+        public int? Color { get; set; }
 
         /// <summary>
         ///  Embed author object
@@ -67,9 +68,26 @@ namespace JNogueira.Discord.Webhook
 
         }
 
-        public DiscordMessageEmbed(string title)
+        public DiscordMessageEmbed(
+            string title,
+            int? color = null,
+            DiscordMessageEmbedAuthor author = null,
+            string url = null,
+            string description = null,
+            IEnumerable<DiscordMessageEmbedField> fields = null,
+            DiscordMessageEmbedThumbnail thumbnail = null,
+            DiscordMessageEmbedImage image = null,
+            DiscordMessageEmbedFooter footer = null)
         {
-            this.Title = title;
+            this.Color       = color;
+            this.Author      = author;
+            this.Title       = title;
+            this.Url         = url?.ToLower();
+            this.Description = description;
+            this.Fields      = fields?.ToArray();
+            this.Thumbnail   = thumbnail;
+            this.Image       = image;
+            this.Footer      = footer;
 
             Validate();
         }
@@ -123,9 +141,11 @@ namespace JNogueira.Discord.Webhook
 
         }
 
-        public DiscordMessageEmbedAuthor(string name)
+        public DiscordMessageEmbedAuthor(string name, string url = null, string iconUrl = null)
         {
-            this.Name = name;
+            this.Name    = name;
+            this.Url     = url?.ToLower();
+            this.IconUrl = iconUrl?.ToLower();
 
             Validate();
         }

@@ -43,11 +43,18 @@ namespace JNogueira.Discord.Webhook
 
         }
 
-        public DiscordMessage(string content, bool tts = false, DiscordMessageEmbed[] embeds = null)
+        public DiscordMessage(
+            string content,
+            string username = null,
+            string avatarUrl = null,
+            bool tts = false,
+            DiscordMessageEmbed[] embeds = null)
         {
-            this.Content = content;
-            this.Tts     = tts;
-            this.Embeds  = embeds;
+            this.Content   = content;
+            this.Username  = username;
+            this.AvatarUrl = avatarUrl;
+            this.Tts       = tts;
+            this.Embeds    = embeds;
 
             Validate();
         }
