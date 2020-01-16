@@ -13,9 +13,12 @@ namespace JNogueira.Discord.Webhook
         /// <summary>
         /// A proxy class to send messages using a Discord webhook.
         /// </summary>
-        /// <param name="urlWebhook"></param>
+        /// <param name="urlWebhook">The Discord webhook url</param>
         public DiscordWebhookProxy(string urlWebhook)
         {
+            if (string.IsNullOrEmpty(urlWebhook))
+                throw new ArgumentNullException(nameof(urlWebhook), "The Discord webhook url cannot be null or empty.");
+
             _urlWebhook = urlWebhook;
         }
 
@@ -23,12 +26,12 @@ namespace JNogueira.Discord.Webhook
         /// Send a message to Discord using a webhook
         /// </summary>
         /// <param name="message">Message to be sent</param>
-        public async Task Send(DiscordMessage message)
+        public async Task SendToDiscord(DiscordMessage message)
         {
             try
             {
                 if (message == null)
-                    throw new ArgumentNullException(nameof(message));
+                    throw new ArgumentNullException(nameof(message), "The message cannot be null.");
 
                 if (message.Invalido)
                     throw new DiscordWebhookProxyException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
