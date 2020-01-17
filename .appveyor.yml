@@ -20,7 +20,7 @@ dotnet_csproj:
   informational_version: '{version}'
 build:
   verbosity: minimal
-  project: discord-webhook.sln
+  project: discord-webhook-client.sln
 build_script:
   - cmd: dotnet build
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
