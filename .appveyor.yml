@@ -11,7 +11,7 @@ branches:
   - master
 configuration: Release
 install:
-  - echo (APPVEYOR_REPO_TAG_NAME)
+  - echo $(APPVEYOR_REPO_TAG_NAME)
   - cmd: dotnet restore
 dotnet_csproj:
   patch: true
