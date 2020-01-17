@@ -51,8 +51,8 @@ namespace discord_webhook_client_test
                             new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
                             new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
                         },
-                        thumbnail: new DiscordMessageEmbedThumbnail("https://upload.wikimedia.org/wikipedia/commons/3/38/4-Nature-Wallpapers-2014-1_ukaavUI.jpg"),
-                        image: new DiscordMessageEmbedImage("https://i.imgur.com/ZGPxFN2.jpg"),
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
+                        image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
                         footer: new DiscordMessageEmbedFooter("This is a embed footer text")
                     )
                 }
