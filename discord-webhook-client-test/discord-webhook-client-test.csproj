@@ -22,4 +22,10 @@
     <ProjectReference Include="..\discord-webhook-client\discord-webhook-client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testSettings.json.enc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
