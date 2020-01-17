@@ -1,4 +1,4 @@
-using JNogueira.Discord.Webhook;
+using JNogueira.Discord.Webhook.Client;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JNogueira.Discord.Webhook
+namespace JNogueira.Discord.Webhook.Client
 {
     public class DiscordWebhookClient
     {

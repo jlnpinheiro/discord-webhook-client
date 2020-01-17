@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JNogueira.Discord.Webhook
+namespace JNogueira.Discord.Webhook.Client
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class DiscordMessageEmbed : Notificavel

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JNogueira.Discord.Webhook
+namespace JNogueira.Discord.Webhook.Client
 {
 
     [Serializable]
