@@ -24,7 +24,7 @@ build:
 build_script:
   - cmd: dotnet build
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client\discord-webhook-client-test\bin\Release\netcoreapp2.2\testSettings.json.enc -secret %my_secret%
+  - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.2\testSettings.json.enc -secret %my_secret%
   - cmd: dotnet pack
   - cmd: cd discord-webhook-client-test
   - cmd: dotnet test
