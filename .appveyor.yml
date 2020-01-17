@@ -33,12 +33,12 @@ build_script:
 artifacts:
   - path: '**\discord-webhook-client*.nupkg'
     name: discord-webhook-client-nuget
-#deploy:
+deploy:
   # NuGet
-  #- provider: NuGet
-  #  api_key:
-  #    secure: BbV/KFKLOAbPhQpkPYd4vd84hLJgPvfXGk0OfQ/x4VjHtwjVXla0HVX8LbdOLigX # your encrypted token from Nuget
-  #  skip_symbols: false
-  #  artifact: discord-webhook-client-nuget
+  - provider: NuGet
+    api_key:
+      secure: BbV/KFKLOAbPhQpkPYd4vd84hLJgPvfXGk0OfQ/x4VjHtwjVXla0HVX8LbdOLigX # your encrypted token from Nuget
+    skip_symbols: false
+    artifact: discord-webhook-client-nuget
 on_success:
   - echo Processo finalizado com sucesso!
