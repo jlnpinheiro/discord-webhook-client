@@ -3,7 +3,9 @@ skip_non_tags: true
 image: Visual Studio 2017
 environment:
   my_secret:
-    secure: YEDSpsgSp8Q6ER0RbDgAbw== # Encriptada em https://ci.appveyor.com/tools/encrypt
+    secure: oB6h1YHPdFxVwg7++llRwg== # Encriptada em https://ci.appveyor.com/tools/encrypt
+  my_salt:
+    secure: ip3vQg3F/xDJ2tAs4dINX0ojuK7Z2Qujf3vIUV3fS0CsEpsHtoyrH8gY1KIic8tPCCOHBwaCAFDfRSyvnDvoKA==
 branches:
   only:
   - master
@@ -24,7 +26,7 @@ build:
 build_script:
   - cmd: dotnet build
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.2\testSettings.json.enc -secret %my_secret%
+  - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.2\testSettings.json.enc -secret %my_secret% -salt %my_salt%
   - cmd: dotnet pack
   - cmd: cd discord-webhook-client-test
   - cmd: dotnet test
