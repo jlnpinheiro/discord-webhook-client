@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>JNogueira.Discord.Webhook</RootNamespace>
     <UserSecretsId>8c802d89-a6cb-43df-a09b-c89bb451e5e5</UserSecretsId>
+    <PackageId>discord-webhook-client</PackageId>
+    <Authors>Jorge Nogueira</Authors>
+    <Company />
+    <Product>Discord Webhook Client</Product>
+    <Description>A client class to send messages using a Discord webhook.</Description>
+    <PackageProjectUrl>https://github.com/jlnpinheiro/discord-webhook</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jlnpinheiro/discord-webhook</RepositoryUrl>
+    <PackageTags>discord webhook client embeds fields message</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

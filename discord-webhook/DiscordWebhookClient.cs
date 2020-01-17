@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace JNogueira.Discord.Webhook
 {
-    public class DiscordWebhookProxy
+    public class DiscordWebhookClient
     {
         private string _urlWebhook;
         
         /// <summary>
-        /// A proxy class to send messages using a Discord webhook.
+        /// A client class to send messages using a Discord webhook.
         /// </summary>
         /// <param name="urlWebhook">The Discord webhook url</param>
-        public DiscordWebhookProxy(string urlWebhook)
+        public DiscordWebhookClient(string urlWebhook)
         {
             if (string.IsNullOrEmpty(urlWebhook))
                 throw new ArgumentNullException(nameof(urlWebhook), "The Discord webhook url cannot be null or empty.");
@@ -34,7 +34,7 @@ namespace JNogueira.Discord.Webhook
                     throw new ArgumentNullException(nameof(message), "The message cannot be null.");
 
                 if (message.Invalido)
-                    throw new DiscordWebhookProxyException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
+                    throw new DiscordWebhookClientException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
 
                 using (var content = new StringContent(message.ToJson(), Encoding.UTF8, "application/json"))
                 using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
@@ -43,17 +43,17 @@ namespace JNogueira.Discord.Webhook
 
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                     {
-                        throw new DiscordWebhookProxyException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
+                        throw new DiscordWebhookClientException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
                     }
                 }
             }
-            catch (DiscordWebhookProxyException)
+            catch (DiscordWebhookClientException)
             {
                 throw;
             }
             catch (Exception ex)
             {
-                throw new DiscordWebhookProxyException("An error occurred in sending the message.", ex);
+                throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
             }
         }
     }

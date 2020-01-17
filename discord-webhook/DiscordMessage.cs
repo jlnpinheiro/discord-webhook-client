@@ -62,18 +62,18 @@ namespace JNogueira.Discord.Webhook
         internal void Validate()
         {
             this
-                .NotificarSeNuloOuVazio(this.Content, "The \"content\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Content) && this.Content.Length > 2000, $"The \"content\" field length limit is 2000 characters (actual lenght is {this.Content.Length}).");
+                .NotificarSeNuloOuVazio(this.Content, "The \"content\" cannot be null or empty.")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Content) && this.Content?.Length > 2000, $"The \"content\" length limit is 2000 characters (actual lenght is {this.Content?.Length}).");
 
             if (this.Embeds?.Any() == true)
             {
-                this.NotificarSeVerdadeiro(this.Embeds.Any(x => x == null), "The \"embeds\" field cannot have null elements in the array.");
+                this.NotificarSeVerdadeiro(this.Embeds.Any(x => x == null), "The \"embeds\" cannot have null elements in the array.");
 
                 this.Embeds
                     .ToList()
                     .ForEach(x =>
                     {
-                        if (x.Invalido)
+                        if (x?.Invalido == true)
                             this.AdicionarNotificacoes(x.Notificacoes);
                     });
             }

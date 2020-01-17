@@ -95,9 +95,9 @@ namespace JNogueira.Discord.Webhook
         internal void Validate()
         {
             this
-                .NotificarSeNuloOuVazio(this.Title, "The embed \"title\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Title) && this.Title.Length > 256, $"The embed \"title\" field length limit is 256 characters (actual lenght is {this.Title.Length}).")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Description) && this.Description.Length > 2048, $"The embed \"description\" field length limit is 2048 characters (actual lenght is {this.Description.Length}).");
+                .NotificarSeNuloOuVazio(this.Title, "The embed \"title\" cannot be null or empty.")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Title) && this.Title?.Length > 256, $"The embed \"title\" length limit is 256 characters (actual lenght is {this.Title?.Length}).")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Description) && this.Description?.Length > 2048, $"The embed \"description\" length limit is 2048 characters (actual lenght is {this.Description?.Length}).");
 
             if (this.Fields?.Any() == true)
             {
@@ -107,7 +107,7 @@ namespace JNogueira.Discord.Webhook
                     .ToList()
                     .ForEach(x =>
                     {
-                        if (x.Invalido)
+                        if (x?.Invalido == true)
                             this.AdicionarNotificacoes(x.Notificacoes);
                     });
             }
@@ -161,8 +161,8 @@ namespace JNogueira.Discord.Webhook
         internal void Validate()
         {
             this
-                .NotificarSeNuloOuVazio(this.Name, "The embed author \"name\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Name) && this.Name.Length > 256, $"The embed author \"name\" field length limit is 256 characters (actual lenght is {this.Name.Length}))");
+                .NotificarSeNuloOuVazio(this.Name, "The embed author \"name\" cannot be null or empty.")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Name) && this.Name.Length > 256, $"The embed author \"name\" length limit is 256 characters (actual lenght is {this.Name.Length}))");
         }
     }
 
@@ -196,7 +196,7 @@ namespace JNogueira.Discord.Webhook
 
         }
 
-        public DiscordMessageEmbedField(string name, string value, bool inLine = false)
+        public DiscordMessageEmbedField(string name, string value = null, bool inLine = false)
         {
             Name   = name;
             Value  = value;
@@ -208,10 +208,9 @@ namespace JNogueira.Discord.Webhook
         public void Validate()
         {
             this
-                .NotificarSeNuloOuVazio(this.Name, "The embed field \"name\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Name) && this.Name.Length > 256, $"The embed field \"name\" field length limit is 256 characters (actual lenght is {this.Name.Length}))")
-                .NotificarSeNuloOuVazio(this.Value, "The embed field \"value\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Value) && this.Value.Length > 1024, $"The embed field \"value\" field length limit is 1024 characters (actual lenght is {this.Value.Length}))");
+                .NotificarSeNuloOuVazio(this.Name, "The embed field \"name\" cannot be null or empty.")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Name) && this.Name.Length > 256, $"The embed field \"name\" length limit is 256 characters (actual lenght is {this.Name?.Length}))")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Value) && this.Value.Length > 1024, $"The embed field \"value\" length limit is 1024 characters (actual lenght is {this.Value?.Length}))");
         }
     }
 
@@ -241,7 +240,7 @@ namespace JNogueira.Discord.Webhook
 
         internal void Validate()
         {
-            this.NotificarSeNuloOuVazio(this.Url, "The embed thumbnail \"url\" field cannot be null or empty.");
+            this.NotificarSeNuloOuVazio(this.Url, "The embed thumbnail \"url\" cannot be null or empty.");
         }
     }
 
@@ -271,7 +270,7 @@ namespace JNogueira.Discord.Webhook
 
         internal void Validate()
         {
-            this.NotificarSeNuloOuVazio(this.Url, "The embed image \"url\" field cannot be null or empty.");
+            this.NotificarSeNuloOuVazio(this.Url, "The embed image \"url\" cannot be null or empty.");
         }
     }
 
@@ -309,8 +308,8 @@ namespace JNogueira.Discord.Webhook
         internal void Validate()
         {
             this
-                .NotificarSeNuloOuVazio(this.Text, "The embed footer \"text\" field cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Text) && this.Text.Length > 2048, $"The embed footer \"text\" field length limit is 2048 characters (actual lenght is {this.Text.Length}))");
+                .NotificarSeNuloOuVazio(this.Text, "The embed footer \"text\" cannot be null or empty.")
+                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Text) && this.Text.Length > 2048, $"The embed footer \"text\" length limit is 2048 characters (actual lenght is {this.Text.Length}))");
         }
     }
 }
