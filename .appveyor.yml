@@ -2,7 +2,7 @@ version: '2.0.{build}'
 skip_non_tags: true 
 image: Visual Studio 2017
 environment:
-  my_variable:
+  my_secret:
     secure: YEDSpsgSp8Q6ER0RbDgAbw== # Encriptada em https://ci.appveyor.com/tools/encrypt
 branches:
   only:
