@@ -16,11 +16,11 @@ install:
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: %APPVEYOR_REPO_TAG_NAME%
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
+  version: $(APPVEYOR_REPO_TAG_NAME)
+  package_version: $(APPVEYOR_REPO_TAG_NAME)
+  assembly_version: $(APPVEYOR_REPO_TAG_NAME)
+  file_version: $(APPVEYOR_REPO_TAG_NAME)
+  informational_version: $(APPVEYOR_REPO_TAG_NAME)
 build:
   verbosity: minimal
   project: discord-webhook-client.sln
