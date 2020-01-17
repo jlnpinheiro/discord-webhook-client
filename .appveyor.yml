@@ -1,4 +1,4 @@
-version: '$(appveyor_build_version)'
+version: '1.0.0'
 skip_non_tags: true 
 image: Visual Studio 2017
 environment:
@@ -11,7 +11,7 @@ branches:
   - master
 configuration: Release
 install:
-  - cmd: echo $(APPVEYOR_REPO_TAG_NAME)
+  - cmd: echo %APPVEYOR_BUILD_ID%
   - cmd: dotnet restore
 dotnet_csproj:
   patch: true
