@@ -11,6 +11,7 @@ branches:
   - master
 configuration: Release
 install:
+  - echo (APPVEYOR_REPO_TAG_NAME)
   - cmd: dotnet restore
 dotnet_csproj:
   patch: true
@@ -33,12 +34,6 @@ build_script:
 artifacts:
   - path: '**\discord-webhook-client*.nupkg'
     name: discord-webhook-client-nuget
-deploy:
-  # NuGet
-  - provider: NuGet
-    api_key:
-      secure: 0/WZ9o7iCtXaw1wJXnF7UQfm8A1Kz3srLeCjgqL9lE9FvcB0Qtv9L33UG+E48dI0 # your encrypted token from Nuget
-    skip_symbols: false
-    artifact: discord-webhook-client-nuget
+
 on_success:
   - echo Processo finalizado com sucesso!

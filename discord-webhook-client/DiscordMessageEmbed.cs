@@ -223,6 +223,7 @@ namespace JNogueira.Discord.Webhook.Client
         /// <summary>
         /// url of thumbnail
         /// </summary>
+        [JsonProperty("url")]
         public string Url { get; set; }
 
         [JsonConstructor]
@@ -253,6 +254,7 @@ namespace JNogueira.Discord.Webhook.Client
         /// <summary>
         /// url of image
         /// </summary>
+        [JsonProperty("url")]
         public string Url { get; set; }
 
         [JsonConstructor]
