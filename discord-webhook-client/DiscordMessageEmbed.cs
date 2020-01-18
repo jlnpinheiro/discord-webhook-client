@@ -152,8 +152,8 @@ namespace JNogueira.Discord.Webhook.Client
         public DiscordMessageEmbedAuthor(string name, string url = null, string iconUrl = null)
         {
             this.Name    = name;
-            this.Url     = url?.ToLower();
-            this.IconUrl = iconUrl?.ToLower();
+            this.Url     = url;
+            this.IconUrl = iconUrl;
 
             Validate();
         }
@@ -234,7 +234,7 @@ namespace JNogueira.Discord.Webhook.Client
 
         public DiscordMessageEmbedThumbnail(string url)
         {
-            this.Url = url?.ToLower();
+            this.Url = url;
 
             Validate();
         }
@@ -265,7 +265,7 @@ namespace JNogueira.Discord.Webhook.Client
 
         public DiscordMessageEmbedImage(string url)
         {
-            this.Url = url?.ToLower();
+            this.Url = url;
 
             Validate();
         }
@@ -300,9 +300,10 @@ namespace JNogueira.Discord.Webhook.Client
 
         }
 
-        public DiscordMessageEmbedFooter(string text)
+        public DiscordMessageEmbedFooter(string text, string iconUrl = null)
         {
-            this.Text = text;
+            this.Text    = text;
+            this.IconUrl = iconUrl;
 
             Validate();
         }

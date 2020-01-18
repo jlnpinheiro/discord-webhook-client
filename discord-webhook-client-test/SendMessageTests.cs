@@ -53,7 +53,7 @@ namespace discord_webhook_client_test
                         },
                         thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
                         image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
-                        footer: new DiscordMessageEmbedFooter("This is a embed footer text")
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://i.imgur.com/oBPXx0D.png")
                     )
                 }
             );
