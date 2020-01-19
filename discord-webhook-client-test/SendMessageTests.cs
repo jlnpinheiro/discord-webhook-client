@@ -34,16 +34,16 @@ namespace discord_webhook_client_test
         public async Task Must_Send_Message_With_Embeds()
         {
             var message = new DiscordMessage(
-                "Test Must_Send_Message_With_Embeds",
+                "Test Must_Send_Message_With_Embeds " + DiscordEmoji.Grinning,
                 username: "Username",
                 avatarUrl: "https://i.imgur.com/oBPXx0D.png",
                 tts: false,
                 embeds: new[]
                 {
                     new DiscordMessageEmbed(
-                        "Title embed",
+                        "Title embed " + DiscordEmoji.Heart,
                         color: 0,
-                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name " + DiscordEmoji.SmileCat),
                         url: "https://www.google.com",
                         description: "This is a embed description.",
                         fields: new[]
@@ -53,7 +53,7 @@ namespace discord_webhook_client_test
                         },
                         thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
                         image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
-                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://i.imgur.com/oBPXx0D.png")
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://i.imgur.com/oBPXx0D.png")
                     )
                 }
             );
