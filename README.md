@@ -1,2 +1,2 @@
 # discord-webhook
-Componente que permite o envio de mensagens para o Discord via webhook
+[![AppVayor - Build status](https://ci.appveyor.com/api/projects/status/hqdwvdowbmifop4f?svg=true)](https://ci.appveyor.com/project/jlnpinheiro/discord-webhook-client) [![NuGet](https://img.shields.io/nuget/dt/discord-webhook-client.svg?style=flat-square)](https://www.nuget.org/packages/discord-webhook-client) [![NuGet](https://img.shields.io/nuget/v/discord-webhook-client.svg?style=flat-square)](https://www.nuget.org/packages/discord-webhook-client)
