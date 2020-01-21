@@ -1,13 +1,7 @@
 ﻿namespace JNogueira.Discord.Webhook.Client
 {
-    public class DiscordEmoji
+    public static class DiscordEmoji
     {
-        public const string None = null;
-        public const string PlusOne = ":+1:";
-        public const string MinusOne = ":-1:";
-        public const string OneHundred = ":100:";
-        public const string OneTwoThreeFour = ":1234:";
-        public const string EightBall = ":8ball:";
         public const string A = ":a:";
         public const string Ab = ":ab:";
         public const string Abc = ":abc:";
@@ -40,13 +34,13 @@
         public const string ArrowLowerRight = ":arrow_lower_right:";
         public const string ArrowRight = ":arrow_right:";
         public const string ArrowRightHook = ":arrow_right_hook:";
-        public const string ArrowUp = ":arrow_up:";
-        public const string ArrowUpDown = ":arrow_up_down:";
-        public const string ArrowUpSmall = ":arrow_up_small:";
-        public const string ArrowUpperLeft = ":arrow_upper_left:";
-        public const string ArrowUpperRight = ":arrow_upper_right:";
         public const string ArrowsClockwise = ":arrows_clockwise:";
         public const string ArrowsCounterclockwise = ":arrows_counterclockwise:";
+        public const string ArrowUp = ":arrow_up:";
+        public const string ArrowUpDown = ":arrow_up_down:";
+        public const string ArrowUpperLeft = ":arrow_upper_left:";
+        public const string ArrowUpperRight = ":arrow_upper_right:";
+        public const string ArrowUpSmall = ":arrow_up_small:";
         public const string Art = ":art:";
         public const string ArticulatedLorry = ":articulated_lorry:";
         public const string Astonished = ":astonished:";
@@ -64,8 +58,8 @@
         public const string Banana = ":banana:";
         public const string Bangbang = ":bangbang:";
         public const string Bank = ":bank:";
-        public const string BarChart = ":bar_chart:";
         public const string Barber = ":barber:";
+        public const string BarChart = ":bar_chart:";
         public const string Baseball = ":baseball:";
         public const string Basketball = ":basketball:";
         public const string Bath = ":bath:";
@@ -82,6 +76,7 @@
         public const string Bicyclist = ":bicyclist:";
         public const string Bike = ":bike:";
         public const string Bikini = ":bikini:";
+        public const string Biohazard = ":biohazard:";
         public const string Bird = ":bird:";
         public const string Birthday = ":birthday:";
         public const string BlackCircle = ":black_circle:";
@@ -136,8 +131,8 @@
         public const string CapitalAbcd = ":capital_abcd:";
         public const string Capricorn = ":capricorn:";
         public const string Car = ":car:";
-        public const string CardIndex = ":card_index:";
         public const string CardFileBox = ":card_file_box:";
+        public const string CardIndex = ":card_index:";
         public const string CardIndexDividers = ":card_index_dividers:";
         public const string CarouselHorse = ":carousel_horse:";
         public const string Cat = ":cat:";
@@ -211,8 +206,8 @@
         public const string Copyright = ":copyright:";
         public const string Corn = ":corn:";
         public const string Couple = ":couple:";
-        public const string CoupleWithHeart = ":couple_with_heart:";
         public const string Couplekiss = ":couplekiss:";
+        public const string CoupleWithHeart = ":couple_with_heart:";
         public const string Cow = ":cow:";
         public const string Cow2 = ":cow2:";
         public const string CreditCard = ":credit_card:";
@@ -238,18 +233,18 @@
         public const string De = ":de:";
         public const string DeciduousTree = ":deciduous_tree:";
         public const string DepartmentStore = ":department_store:";
-        public const string DiamondShapeWithADotInside = ":diamond_shape_with_a_dot_inside:";
         public const string Diamonds = ":diamonds:";
+        public const string DiamondShapeWithADotInside = ":diamond_shape_with_a_dot_inside:";
         public const string Disappointed = ":disappointed:";
         public const string DisappointedRelieved = ":disappointed_relieved:";
         public const string Dizzy = ":dizzy:";
         public const string DizzyFace = ":dizzy_face:";
-        public const string DoNotLitter = ":do_not_litter:";
         public const string Dog = ":dog:";
         public const string Dog2 = ":dog2:";
         public const string Dollar = ":dollar:";
         public const string Dolls = ":dolls:";
         public const string Dolphin = ":dolphin:";
+        public const string DoNotLitter = ":do_not_litter:";
         public const string Donut = ":donut:";
         public const string Door = ":door:";
         public const string Doughnut = ":doughnut:";
@@ -259,7 +254,6 @@
         public const string DromedaryCamel = ":dromedary_camel:";
         public const string Droplet = ":droplet:";
         public const string Dvd = ":dvd:";
-        public const string EhyphenMail = ":e-mail:";
         public const string Ear = ":ear:";
         public const string EarOfRice = ":ear_of_rice:";
         public const string EarthAfrica = ":earth_africa:";
@@ -267,7 +261,9 @@
         public const string EarthAsia = ":earth_asia:";
         public const string Egg = ":egg:";
         public const string Eggplant = ":eggplant:";
+        public const string EhyphenMail = ":e-mail:";
         public const string Eight = ":eight:";
+        public const string EightBall = ":8ball:";
         public const string EightPointedBlackStar = ":eight_pointed_black_star:";
         public const string EightSpokedAsterisk = ":eight_spoked_asterisk:";
         public const string ElectricPlug = ":electric_plug:";
@@ -366,10 +362,10 @@
         public const string Headphones = ":headphones:";
         public const string HearNoEvil = ":hear_no_evil:";
         public const string Heart = ":heart:";
+        public const string Heartbeat = ":heartbeat:";
         public const string HeartDecoration = ":heart_decoration:";
         public const string HeartEyes = ":heart_eyes:";
         public const string HeartEyesCat = ":heart_eyes_cat:";
-        public const string Heartbeat = ":heartbeat:";
         public const string Heartpulse = ":heartpulse:";
         public const string Hearts = ":hearts:";
         public const string HeavyCheckMark = ":heavy_check_mark:";
@@ -385,8 +381,8 @@
         public const string HighBrightness = ":high_brightness:";
         public const string HighHeel = ":high_heel:";
         public const string Hocho = ":hocho:";
-        public const string HoneyPot = ":honey_pot:";
         public const string Honeybee = ":honeybee:";
+        public const string HoneyPot = ":honey_pot:";
         public const string Horse = ":horse:";
         public const string HorseRacing = ":horse_racing:";
         public const string Hospital = ":hospital:";
@@ -470,9 +466,9 @@
         public const string MailboxWithMail = ":mailbox_with_mail:";
         public const string MailboxWithNoMail = ":mailbox_with_no_mail:";
         public const string Man = ":man:";
+        public const string MansShoe = ":mans_shoe:";
         public const string ManWithGuaPiMao = ":man_with_gua_pi_mao:";
         public const string ManWithTurban = ":man_with_turban:";
-        public const string MansShoe = ":mans_shoe:";
         public const string MapleLeaf = ":maple_leaf:";
         public const string Mask = ":mask:";
         public const string Massage = ":massage:";
@@ -488,19 +484,20 @@
         public const string MilkyWay = ":milky_way:";
         public const string Minibus = ":minibus:";
         public const string Minidisc = ":minidisc:";
+        public const string MinusOne = ":-1:";
         public const string MobilePhoneOff = ":mobile_phone_off:";
+        public const string Moneybag = ":moneybag:";
         public const string MoneyMouthFace = ":money_mouth_face:";
         public const string MoneyWithWings = ":money_with_wings:";
-        public const string Moneybag = ":moneybag:";
         public const string Monkey = ":monkey:";
         public const string MonkeyFace = ":monkey_face:";
         public const string Monorail = ":monorail:";
         public const string Moon = ":moon:";
         public const string MortarBoard = ":mortar_board:";
-        public const string MountFuji = ":mount_fuji:";
         public const string MountainBicyclist = ":mountain_bicyclist:";
         public const string MountainCableway = ":mountain_cableway:";
         public const string MountainRailway = ":mountain_railway:";
+        public const string MountFuji = ":mount_fuji:";
         public const string Mouse = ":mouse:";
         public const string Mouse2 = ":mouse2:";
         public const string MovieCamera = ":movie_camera:";
@@ -530,10 +527,11 @@
         public const string NoGood = ":no_good:";
         public const string NoMobilePhones = ":no_mobile_phones:";
         public const string NoMouth = ":no_mouth:";
-        public const string NoPedestrians = ":no_pedestrians:";
-        public const string NoSmoking = ":no_smoking:";
+        public const string None = null;
         public const string NonPotableWater = ":non-potable_water:";
+        public const string NoPedestrians = ":no_pedestrians:";
         public const string Nose = ":nose:";
+        public const string NoSmoking = ":no_smoking:";
         public const string Notebook = ":notebook:";
         public const string NotebookWithDecorativeCover = ":notebook_with_decorative_cover:";
         public const string Notes = ":notes:";
@@ -556,6 +554,8 @@
         public const string OncomingPoliceCar = ":oncoming_police_car:";
         public const string OncomingTaxi = ":oncoming_taxi:";
         public const string One = ":one:";
+        public const string OneHundred = ":100:";
+        public const string OneTwoThreeFour = ":1234:";
         public const string OpenFileFolder = ":open_file_folder:";
         public const string OpenHands = ":open_hands:";
         public const string OpenMouth = ":open_mouth:";
@@ -565,8 +565,8 @@
         public const string Ox = ":ox:";
         public const string Package = ":package:";
         public const string PageFacingUp = ":page_facing_up:";
-        public const string PageWithCurl = ":page_with_curl:";
         public const string Pager = ":pager:";
+        public const string PageWithCurl = ":page_with_curl:";
         public const string PalmTree = ":palm_tree:";
         public const string PandaFace = ":panda_face:";
         public const string Paperclip = ":paperclip:";
@@ -595,6 +595,7 @@
         public const string Pisces = ":pisces:";
         public const string Pizza = ":pizza:";
         public const string Plus1 = ":plus1:";
+        public const string PlusOne = ":+1:";
         public const string PointDown = ":point_down:";
         public const string PointLeft = ":point_left:";
         public const string PointRight = ":point_right:";
@@ -603,9 +604,9 @@
         public const string PoliceCar = ":police_car:";
         public const string Poodle = ":poodle:";
         public const string Poop = ":poop:";
-        public const string PostOffice = ":post_office:";
         public const string PostalHorn = ":postal_horn:";
         public const string Postbox = ":postbox:";
+        public const string PostOffice = ":post_office:";
         public const string PotableWater = ":potable_water:";
         public const string Pouch = ":pouch:";
         public const string PoultryLeg = ":poultry_leg:";
@@ -623,6 +624,7 @@
         public const string Rabbit2 = ":rabbit2:";
         public const string Racehorse = ":racehorse:";
         public const string Radio = ":radio:";
+        public const string Radioactive = ":radioactive:";
         public const string RadioButton = ":radio_button:";
         public const string Rage = ":rage:";
         public const string Rage1 = ":rage1:";
@@ -685,8 +687,8 @@
         public const string Scroll = ":scroll:";
         public const string Seat = ":seat:";
         public const string Secret = ":secret:";
-        public const string SeeNoEvil = ":see_no_evil:";
         public const string Seedling = ":seedling:";
+        public const string SeeNoEvil = ":see_no_evil:";
         public const string Seven = ":seven:";
         public const string ShavedIce = ":shaved_ice:";
         public const string Sheep = ":sheep:";
@@ -734,10 +736,12 @@
         public const string Sparkler = ":sparkler:";
         public const string Sparkles = ":sparkles:";
         public const string SparklingHeart = ":sparkling_heart:";
-        public const string SpeakNoEvil = ":speak_no_evil:";
         public const string Speaker = ":speaker:";
+        public const string SpeakNoEvil = ":speak_no_evil:";
         public const string SpeechBalloon = ":speech_balloon:";
         public const string Speedboat = ":speedboat:";
+        public const string Spider = ":spider:";
+        public const string SpiderWeb = ":spider_web:";
         public const string Squirrel = ":squirrel:";
         public const string Star = ":star:";
         public const string Star2 = ":star2:";
@@ -751,12 +755,12 @@
         public const string StuckOutTongue = ":stuck_out_tongue:";
         public const string StuckOutTongueClosedEyes = ":stuck_out_tongue_closed_eyes:";
         public const string StuckOutTongueWinkingEye = ":stuck_out_tongue_winking_eye:";
-        public const string SunWithFace = ":sun_with_face:";
         public const string Sunflower = ":sunflower:";
         public const string Sunglasses = ":sunglasses:";
         public const string Sunny = ":sunny:";
         public const string Sunrise = ":sunrise:";
         public const string SunriseOverMountains = ":sunrise_over_mountains:";
+        public const string SunWithFace = ":sun_with_face:";
         public const string Surfer = ":surfer:";
         public const string Sushi = ":sushi:";
         public const string Suspect = ":suspect:";
