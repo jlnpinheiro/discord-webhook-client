@@ -24,7 +24,7 @@ dotnet add package discord-webhook-client
 ## Sending a message...
 Sending a message is very simple!
 - Add reference to namespace ```JNogueira.Discord.Webhook.Client```
-- Create an instance of the class ```DiscordWebhookClient``` with your Discord webhook URL.
+- Create an instance of the class ```DiscordWebhookClient``` with your Discord webhook URL. For more information about how to create a Discord webhook, visit https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
 - Create your ```DiscordMessage``` with all parameters of your message.
 - Send the message!
 
