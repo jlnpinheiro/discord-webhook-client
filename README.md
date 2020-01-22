@@ -64,3 +64,6 @@ var message = new DiscordMessage(
 // Send the message!
 await _client.SendToDiscord(message);
 ```
+Look at to your Discord channel...your message is there!
+
+![A messagem in your Discord channel](../assets/screen-shot.png?raw=true)
