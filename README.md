@@ -28,7 +28,7 @@ Sending a message is very simple!
 - Create your ```DiscordMessage``` with all parameters of your message.
 - Send the message!
 
-```charp
+```csharp
 // Add reference to namespace JNogueira.Discord.Webhook.Client
 using JNogueira.Discord.Webhook.Client;
 
