@@ -3,7 +3,7 @@
 
 Simple .NET client to send **Discord** (https://discordapp.com/) messages using a webhook.
 
-Reference documentation for creating this client: [Discord Webhooks Client](https://birdie0.github.io/discord-webhooks-guide/) and [Discord Developer Portal](https://discordapp.com/developers/docs/intro).
+Reference documentation for creating this client: [Discord Webhooks Guide](https://birdie0.github.io/discord-webhooks-guide/) and [Discord Developer Portal](https://discordapp.com/developers/docs/intro).
 
 ## Target
 .NET Standard 2.0+
