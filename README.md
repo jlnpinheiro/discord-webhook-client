@@ -23,7 +23,44 @@ dotnet add package discord-webhook-client
 
 ## Sending a message...
 Sending a message is very simple!
-- Add ```using JNogueira.Discord.Webhook.Client;```
+- Add reference to namespace ```JNogueira.Discord.Webhook.Client```
 - Create an instance of the class ```DiscordWebhookClient``` with your Discord webhook URL.
 - Create your ```DiscordMessage``` with all parameters of your message.
-- Send message!
+- Send the message!
+
+```charp
+// Add reference to namespace JNogueira.Discord.Webhook.Client
+using JNogueira.Discord.Webhook.Client;
+
+// Create an instance of the class DiscordWebhookClient with your Discord webhook URL.
+var client = new DiscordWebhookClient("Your Discord webhook URL herer!");
+
+// Create your DiscordMessage with all parameters of your message.
+var message = new DiscordMessage(
+    "This is my message " + DiscordEmoji.Grinning,
+    username: "Username",
+    avatarUrl: "https://i.imgur.com/oBPXx0D.png",
+    tts: false,
+    embeds: new[]
+    {
+        new DiscordMessageEmbed(
+            "Discord Webhook Client sent his message! " + DiscordEmoji.Heart,
+            color: 0,
+            author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+            url: "https://www.google.com",
+            description: "This is a embed description.",
+            fields: new[]
+            {
+                new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
+                new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
+            },
+            thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
+            image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
+            footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://i.imgur.com/oBPXx0D.png")
+        )
+    }
+);
+
+// Send the message!
+await _client.SendToDiscord(message);
+```
