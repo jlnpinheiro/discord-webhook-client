@@ -21,7 +21,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Send_Hello_World_Message()
+        public async Task Should_Send_Hello_World_Message()
         {
             var message = new DiscordMessage("Hello World!");
 
@@ -31,10 +31,10 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Send_Message_With_Embeds()
+        public async Task Should_Send_Message_With_Embeds()
         {
             var message = new DiscordMessage(
-                "Test Must_Send_Message_With_Embeds " + DiscordEmoji.Grinning,
+                "Test Should_Send_Message_With_Embeds " + DiscordEmoji.Grinning,
                 username: "Username",
                 avatarUrl: "https://i.imgur.com/oBPXx0D.png",
                 tts: false,
@@ -64,7 +64,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Content_Empty()
+        public async Task Should_Not_Send_Message_With_Content_Empty()
         {
             try
             {
@@ -79,7 +79,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Content_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Content_Length_Limit_Exceeded()
         {
             try
             {
@@ -94,7 +94,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embeds_Null_Element()
+        public async Task Should_Not_Send_Message_With_Embeds_Null_Element()
         {
             try
             {
@@ -109,7 +109,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Title_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Title_Empty()
         {
             try
             {
@@ -124,7 +124,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Title_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Title_Length_Limit_Exceeded()
         {
             try
             {
@@ -139,7 +139,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Description_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Description_Length_Limit_Exceeded()
         {
             try
             {
@@ -154,7 +154,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Author_Name_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Author_Name_Empty()
         {
             try
             {
@@ -169,7 +169,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Author_Name_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Author_Name_Length_Limit_Exceeded()
         {
             try
             {
@@ -184,7 +184,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Fields_Size_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Fields_Size_Limit_Exceeded()
         {
             var fields = new List<DiscordMessageEmbedField>();
 
@@ -206,7 +206,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Field_Name_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Field_Name_Empty()
         {
             try
             {
@@ -221,7 +221,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Field_Name_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Field_Name_Length_Limit_Exceeded()
         {
             try
             {
@@ -236,7 +236,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Field_Value_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Field_Value_Length_Limit_Exceeded()
         {
             try
             {
@@ -251,7 +251,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Thumbnail_Url_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Thumbnail_Url_Empty()
         {
             try
             {
@@ -266,7 +266,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Image_Url_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Image_Url_Empty()
         {
             try
             {
@@ -281,7 +281,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Footer_Text_Empty()
+        public async Task Should_Not_Send_Message_With_Embed_Footer_Text_Empty()
         {
             try
             {
@@ -296,7 +296,7 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Must_Not_Send_Message_With_Embed_Footer_Text_Length_Limit_Exceeded()
+        public async Task Should_Not_Send_Message_With_Embed_Footer_Text_Length_Limit_Exceeded()
         {
             try
             {
