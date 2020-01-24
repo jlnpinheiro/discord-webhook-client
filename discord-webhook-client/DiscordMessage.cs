@@ -79,7 +79,7 @@ namespace JNogueira.Discord.Webhook.Client
             }
         }
 
-        internal string ToJson() => this == null
+        public string ToJson() => this == null
             ? string.Empty
             : JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
     }

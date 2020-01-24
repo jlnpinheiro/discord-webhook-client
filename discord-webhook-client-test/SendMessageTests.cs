@@ -2,6 +2,7 @@ using JNogueira.Discord.Webhook.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace discord_webhook_client_test
@@ -59,6 +60,43 @@ namespace discord_webhook_client_test
             );
 
             await _client.SendToDiscord(message);
+
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public async Task Should_Send_Message_With_Files()
+        {
+            var message = new DiscordMessage(
+                "Test Should_Send_Message_With_Files " + DiscordEmoji.Grinning,
+                username: "Username",
+                avatarUrl: "https://i.imgur.com/oBPXx0D.png",
+                tts: false,
+                embeds: new[]
+                {
+                    new DiscordMessageEmbed(
+                        "Title embed " + DiscordEmoji.Heart,
+                        color: 0,
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name " + DiscordEmoji.SmileCat),
+                        url: "https://www.google.com",
+                        description: "This is a embed description.",
+                        fields: new[]
+                        {
+                            new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
+                            new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
+                        },
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
+                        image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://i.imgur.com/oBPXx0D.png")
+                    )
+                }
+            );
+
+            var file1 = new DiscordFile("test.txt", Encoding.UTF8.GetBytes("This is the first file content will be sent to Discord."));
+
+            var file2 = new DiscordFile("test2.txt", Encoding.UTF8.GetBytes("This is the secound file content will be sent to Discord."));
+
+            await _client.SendToDiscord(message, new[] { file1, file2 });
 
             Assert.IsTrue(true);
         }

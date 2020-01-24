@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -44,6 +45,63 @@ namespace JNogueira.Discord.Webhook.Client
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                     {
                         throw new DiscordWebhookClientException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
+                    }
+                }
+            }
+            catch (DiscordWebhookClientException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
+            }
+        }
+
+        /// <summary>
+        /// Send a message with files to Discord using a webhook
+        /// </summary>
+        /// <param name="message">Message to be sent</param>
+        /// <param name="files">Files to be sent</param>
+        public async Task SendToDiscord(DiscordMessage message, DiscordFile[] files)
+        {
+            try
+            {
+                if (files == null || files.Length == 0)
+                    await SendToDiscord(message);
+
+                if (message == null)
+                    throw new ArgumentNullException(nameof(message), "The message cannot be null.");
+
+                if (message.Invalido)
+                    throw new DiscordWebhookClientException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
+
+                if (files.Any(x => x.Invalido))
+                    throw new DiscordWebhookClientException($"The message cannot be sent: {string.Join(", ", files.Select(x => string.Join(" - ", x.Mensagens)).ToList())}");
+
+                using (var formContent = new MultipartFormDataContent())
+                {
+                    formContent.Add(new StringContent(message.ToJson(), Encoding.UTF8), "payload_json");
+
+                    var count = 1;
+
+                    foreach (var file in files)
+                    {
+                        var fileContent = new ByteArrayContent(file.Content);
+
+                        formContent.Add(fileContent, "file" + count, file.Name);
+
+                        count++;
+                    }
+
+                    using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
+                    {
+                        var response = await client.PostAsync(_urlWebhook, formContent);
+
+                        if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
+                        {
+                            throw new DiscordWebhookClientException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
+                        }
                     }
                 }
             }
