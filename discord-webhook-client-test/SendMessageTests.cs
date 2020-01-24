@@ -35,26 +35,26 @@ namespace discord_webhook_client_test
         public async Task Should_Send_Message_With_Embeds()
         {
             var message = new DiscordMessage(
-                "Test Should_Send_Message_With_Embeds " + DiscordEmoji.Grinning,
+                "Discord Webhook Client sent this message! " + DiscordEmoji.Grinning,
                 username: "Username",
-                avatarUrl: "https://i.imgur.com/oBPXx0D.png",
+                avatarUrl: "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4",
                 tts: false,
                 embeds: new[]
                 {
                     new DiscordMessageEmbed(
-                        "Title embed " + DiscordEmoji.Heart,
+                        "Embed title " + DiscordEmoji.Thumbsup,
                         color: 0,
-                        author: new DiscordMessageEmbedAuthor("Embed 1 author name " + DiscordEmoji.SmileCat),
-                        url: "https://www.google.com",
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        url: "https://github.com/jlnpinheiro/discord-webhook-client/",
                         description: "This is a embed description.",
                         fields: new[]
                         {
                             new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
                             new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
                         },
-                        thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
-                        image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
-                        footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://i.imgur.com/oBPXx0D.png")
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        image: new DiscordMessageEmbedImage("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4")
                     )
                 }
             );
