@@ -1,4 +1,4 @@
-﻿using JNogueira.Infraestrutura.NotifiqueMe;
+﻿using JNogueira.NotifiqueMe;
 
 namespace JNogueira.Discord.Webhook.Client
 {
