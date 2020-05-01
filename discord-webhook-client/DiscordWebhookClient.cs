@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Polly;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,7 +42,19 @@ namespace JNogueira.Discord.Webhook.Client
                 using (var content = new StringContent(message.ToJson(), Encoding.UTF8, "application/json"))
                 using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
                 {
-                    var response = await client.PostAsync(_urlWebhook, content);
+                    var response = await Policy
+                        .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
+                        .RetryAsync(3, onRetry: (httpResponse, count) =>
+                        {
+                            if ((int)httpResponse.Result.StatusCode == 429) // TOO MANY REQUESTS
+                            {
+                                var jsonBody = JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result.Content.ReadAsStringAsync().Result);
+
+                                if (jsonBody != null)
+                                    System.Threading.Thread.Sleep(jsonBody.RetryAfter + 1);
+                            }
+                        })
+                        .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, content));
 
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                     {
@@ -114,5 +128,17 @@ namespace JNogueira.Discord.Webhook.Client
                 throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
             }
         }
+    }
+
+    public class DiscordTooManyRequestsResponse
+    {
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
+        [JsonProperty("retry_after")]
+        public int RetryAfter { get; set; }
+
+        [JsonProperty("global")]
+        public bool Global { get; set; }
     }
 }

@@ -347,5 +347,16 @@ namespace discord_webhook_client_test
                 Assert.IsTrue(ex.Message.Contains("The embed footer \"text\" length limit is 2048 characters"));
             }
         }
+
+        [TestMethod]
+        public async Task Should_Not_Send_Message_With_Too_Many_Requests()
+        {
+            for (int i = 0; i <= 100; i++)
+            {
+                await _client.SendToDiscord(new DiscordMessage("test"));
+            }
+
+            Assert.Fail("Messages successfully sent.");
+        }
     }
 }
