@@ -1,4 +1,4 @@
-﻿using JNogueira.Infraestrutura.NotifiqueMe;
+﻿using JNogueira.NotifiqueMe;
 using Newtonsoft.Json;
 using System.Linq;
 
