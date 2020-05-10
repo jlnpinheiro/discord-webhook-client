@@ -11,31 +11,31 @@ namespace JNogueira.Discord.Webhook.Client
         /// Overrides the current username of the webhook
         /// </summary>
         [JsonProperty("username")]
-        public string Username { get; set; }
+        public string Username { get; private set; }
 
         /// <summary>
         /// Overrides the default avatar of the webhook
         /// </summary>
         [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; }
+        public string AvatarUrl { get; private set; }
 
         /// <summary>
         /// Simple message, the message contains (up to 2000 characters)
         /// </summary>
         [JsonProperty("content")]
-        public string Content { get; set; }
+        public string Content { get; private set; }
 
         /// <summary>
         /// If true, the message will be pronounced in chat like tts message
         /// </summary>
         [JsonProperty("tts")]
-        public bool Tts { get; set; }
+        public bool Tts { get; private set; }
 
         /// <summary>
         /// An array of embed objects. That means you put use more than one in the same body
         /// </summary>
         [JsonProperty("embeds")]
-        public DiscordMessageEmbed[] Embeds { get; set; }
+        public DiscordMessageEmbed[] Embeds { get; private set; }
 
         [JsonConstructor]
         private DiscordMessage()

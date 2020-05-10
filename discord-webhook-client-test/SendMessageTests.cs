@@ -147,21 +147,6 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
-        public async Task Should_Not_Send_Message_With_Embed_Title_Empty()
-        {
-            try
-            {
-                await _client.SendToDiscord(new DiscordMessage("Content", embeds: new DiscordMessageEmbed[] { new DiscordMessageEmbed(string.Empty) }));
-
-                Assert.Fail("Message successfully sent.");
-            }
-            catch (DiscordWebhookClientException ex)
-            {
-                Assert.IsTrue(ex.Message.Contains("The embed \"title\" cannot be null or empty."));
-            }
-        }
-
-        [TestMethod]
         public async Task Should_Not_Send_Message_With_Embed_Title_Length_Limit_Exceeded()
         {
             try
@@ -353,7 +338,7 @@ namespace discord_webhook_client_test
         {
             for (int i = 0; i <= 15; i++)
             {
-                await _client.SendToDiscord(new DiscordMessage("test" + i));
+                await _client.SendToDiscord(new DiscordMessage("test " + i));
             }
 
             Assert.IsTrue(1 == 1);

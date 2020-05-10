@@ -12,7 +12,8 @@
     <PackageProjectUrl>https://github.com/jlnpinheiro/discord-webhook</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jlnpinheiro/discord-webhook</RepositoryUrl>
     <PackageTags>discord webhook client embeds fields message</PackageTags>
-    <Version>1.2.1</Version>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Bug fix and Discord field limits validations.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

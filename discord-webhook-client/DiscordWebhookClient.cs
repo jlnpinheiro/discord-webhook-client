@@ -44,7 +44,7 @@ namespace JNogueira.Discord.Webhook.Client
                 {
                     var response = await Policy
                         .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
-                        .RetryAsync(3, onRetry: (httpResponse, count) =>
+                        .RetryAsync(3, onRetry: (httpResponse, _) =>
                         {
                             if ((int)httpResponse.Result.StatusCode == 429) // TOO MANY REQUESTS
                             {
@@ -84,9 +84,14 @@ namespace JNogueira.Discord.Webhook.Client
                 if (files == null || files.Length == 0)
                     await SendToDiscord(message);
 
-                if (message == null)
-                    throw new ArgumentNullException(nameof(message), "The message cannot be null.");
+                if (files.Length > 10)
+                    throw new DiscordWebhookClientException($"Files collection size limit is 10 objects. (actual size is {files.Length})");
 
+                if (message == null)
+                    throw new DiscordWebhookClientException("The message parameter cannot be null.");
+
+                message.AdicionarNotificacoes(message.Embeds);
+                
                 if (message.Invalido)
                     throw new DiscordWebhookClientException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
 
@@ -110,7 +115,19 @@ namespace JNogueira.Discord.Webhook.Client
 
                     using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
                     {
-                        var response = await client.PostAsync(_urlWebhook, formContent);
+                        var response = await Policy
+                            .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
+                            .RetryAsync(3, onRetry: (httpResponse, _) =>
+                            {
+                                if ((int)httpResponse.Result.StatusCode == 429) // TOO MANY REQUESTS
+                                {
+                                    var jsonBody = JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result.Content.ReadAsStringAsync().Result);
+
+                                    if (jsonBody != null)
+                                        System.Threading.Thread.Sleep(jsonBody.RetryAfter + 1);
+                                }
+                            })
+                            .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, formContent));
 
                         if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                         {
