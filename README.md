@@ -33,7 +33,7 @@ Sending a message is very simple!
 using JNogueira.Discord.Webhook.Client;
 
 // Create an instance of the class DiscordWebhookClient with your Discord webhook URL.
-var client = new DiscordWebhookClient("Your Discord webhook URL herer!");
+var client = new DiscordWebhookClient("Your Discord webhook URL here!");
 
 // Create your DiscordMessage with all parameters of your message.
 var message = new DiscordMessage(
