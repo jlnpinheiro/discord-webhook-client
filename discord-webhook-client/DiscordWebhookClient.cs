@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Polly;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,7 +31,8 @@ namespace JNogueira.Discord.Webhook.Client
         /// Send a message to Discord using a webhook
         /// </summary>
         /// <param name="message">Message to be sent</param>
-        public async Task SendToDiscord(DiscordMessage message)
+        /// <param name="sendMessageAsFileAttachmentOnError">When an error occurs in sending the message, the client sends the message content as an file attachment.</param>
+        public async Task SendToDiscord(DiscordMessage message, bool sendMessageAsFileAttachmentOnError = false)
         {
             try
             {
@@ -37,7 +40,7 @@ namespace JNogueira.Discord.Webhook.Client
                     throw new ArgumentNullException(nameof(message), "The message cannot be null.");
 
                 if (message.Invalido)
-                    throw new DiscordWebhookClientException($"The message cannot be sent: {string.Join(", ", message.Mensagens)}");
+                    throw new DiscordWebhookClientException($"The message param is invalid: {string.Join(", ", message.Mensagens)}");
 
                 using (var content = new StringContent(message.ToJson(), Encoding.UTF8, "application/json"))
                 using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
@@ -58,17 +61,25 @@ namespace JNogueira.Discord.Webhook.Client
 
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                     {
-                        throw new DiscordWebhookClientException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
+                        var responseContent = await response.Content.ReadAsStringAsync();
+
+                        throw new DiscordWebhookClientException($"An error occurred in sending the message: {responseContent} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}", responseContent, response.StatusCode);
                     }
                 }
             }
-            catch (DiscordWebhookClientException)
+            catch (DiscordWebhookClientException ex)
             {
-                throw;
+                if (!sendMessageAsFileAttachmentOnError)
+                    throw;
+
+                await SendToDiscordAsAttachment(message, ex);
             }
             catch (Exception ex)
             {
-                throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
+                if (!sendMessageAsFileAttachmentOnError)
+                    throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
+
+                await SendToDiscordAsAttachment(message, ex);
             }
         }
 
@@ -77,7 +88,8 @@ namespace JNogueira.Discord.Webhook.Client
         /// </summary>
         /// <param name="message">Message to be sent</param>
         /// <param name="files">Files to be sent</param>
-        public async Task SendToDiscord(DiscordMessage message, DiscordFile[] files)
+        /// <param name="sendMessageAsFileAttachmentOnError">When an error occurs in sending the message, the client sends the message content as an file attachment.</param>
+        public async Task SendToDiscord(DiscordMessage message, DiscordFile[] files, bool sendMessageAsFileAttachmentOnError = false)
         {
             try
             {
@@ -136,13 +148,78 @@ namespace JNogueira.Discord.Webhook.Client
                     }
                 }
             }
+            catch (DiscordWebhookClientException ex)
+            {
+                if (!sendMessageAsFileAttachmentOnError)
+                    throw;
+
+                await SendToDiscordAsAttachment(message, ex, files);
+            }
+            catch (Exception ex)
+            {
+                if (!sendMessageAsFileAttachmentOnError)
+                    throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
+
+                await SendToDiscordAsAttachment(message, ex, files);
+            }
+        }
+
+        private async Task SendToDiscordAsAttachment(DiscordMessage originalMessage, Exception exception, DiscordFile[] files = null)
+        {
+            if (originalMessage == null || exception == null)
+                return;
+            
+            try
+            {
+                var attachmentMessage = new DiscordMessage(
+                    $"{DiscordEmoji.Skull} **Discord Webhook Client error**: There was an error sending the message to Discord. The original message content and exception details are attached as file.",
+                    avatarUrl: "https://discord.com/assets/9f6f9cd156ce35e2d94c0e62e3eff462.png",
+                    tts: false,
+                    embeds: new[]
+                    {
+                        new DiscordMessageEmbed(
+                            color: (int)DiscordColor.Red,
+                            fields: new []
+                            {
+                                new DiscordMessageEmbedField("Exception", exception.GetBaseException().Message),
+                                new DiscordMessageEmbedField("Type", exception.GetType().ToString()),
+                            }
+                        )
+                    }
+                );
+
+                var originalMessageAttachment = new DiscordFile("original-message.txt", Encoding.UTF8.GetBytes(originalMessage.ToTxtFileContent()));
+
+                var exceptionInfo = new StringBuilder();
+                exceptionInfo.Append("Message: ").AppendLine(exception.Message);
+                exceptionInfo.Append("Exception type: ").AppendLine(exception.GetType().ToString());
+                exceptionInfo.Append("Source: ").AppendLine(exception.Source);
+                exceptionInfo.Append("Base exception: ").AppendLine(exception.GetBaseException()?.Message);
+
+                foreach (DictionaryEntry data in exception.Data)
+                    exceptionInfo.AppendLine($"{data.Key}: {data.Value}");
+
+                exceptionInfo.Append("Stack trace: ").Append(exception.StackTrace);
+
+                var exceptionAttachment = new DiscordFile("exception.txt", Encoding.UTF8.GetBytes(exceptionInfo.ToString()));
+
+                var attachmentFiles = new List<DiscordFile>();
+
+                if (files?.Length > 0)
+                    attachmentFiles.AddRange(files);
+
+                attachmentFiles.Add(originalMessageAttachment);
+                attachmentFiles.Add(exceptionAttachment);
+
+                await SendToDiscord(attachmentMessage, attachmentFiles.ToArray());
+            }
             catch (DiscordWebhookClientException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new DiscordWebhookClientException("An error occurred in sending the message.", ex);
+                throw new DiscordWebhookClientException("An error occurred in sending the message.", exception);
             }
         }
     }

@@ -70,31 +70,31 @@ namespace discord_webhook_client_test
             var message = new DiscordMessage(
                 "Test Should_Send_Message_With_Files " + DiscordEmoji.Grinning,
                 username: "Username",
-                avatarUrl: "https://i.imgur.com/oBPXx0D.png",
+                avatarUrl: "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4",
                 tts: false,
                 embeds: new[]
                 {
                     new DiscordMessageEmbed(
                         "Title embed " + DiscordEmoji.Heart,
                         color: 0,
-                        author: new DiscordMessageEmbedAuthor("Embed 1 author name " + DiscordEmoji.SmileCat),
-                        url: "https://www.google.com",
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        url: "https://github.com/jlnpinheiro/discord-webhook-client/",
                         description: "This is a embed description.",
                         fields: new[]
                         {
                             new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
                             new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
                         },
-                        thumbnail: new DiscordMessageEmbedThumbnail("https://i.imgur.com/oBPXx0D.png"),
-                        image: new DiscordMessageEmbedImage("https://i.imgur.com/oBPXx0D.png"),
-                        footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://i.imgur.com/oBPXx0D.png")
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        image: new DiscordMessageEmbedImage("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text " + DiscordEmoji.Pray, "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4")
                     )
                 }
             );
 
-            var file1 = new DiscordFile("test.txt", Encoding.UTF8.GetBytes("This is the first file content will be sent to Discord."));
+            var file1 = new DiscordFile("test1.txt", Encoding.UTF8.GetBytes("This is the first file."));
 
-            var file2 = new DiscordFile("test2.txt", Encoding.UTF8.GetBytes("This is the secound file content will be sent to Discord."));
+            var file2 = new DiscordFile("test2.txt", Encoding.UTF8.GetBytes("This is the secound file."));
 
             await _client.SendToDiscord(message, new[] { file1, file2 });
 
@@ -112,7 +112,7 @@ namespace discord_webhook_client_test
             }
             catch (DiscordWebhookClientException ex)
             {
-                Assert.IsTrue(ex.Message.Contains("The \"content\" cannot be null or empty."));
+                Assert.IsTrue(ex.Message.Contains("The \"content\" element cannot be null or empty."));
             }
         }
 
@@ -127,22 +127,7 @@ namespace discord_webhook_client_test
             }
             catch (DiscordWebhookClientException ex)
             {
-                Assert.IsTrue(ex.Message.Contains("The \"content\" length limit is 2000 characters"));
-            }
-        }
-
-        [TestMethod]
-        public async Task Should_Not_Send_Message_With_Embeds_Null_Element()
-        {
-            try
-            {
-                await _client.SendToDiscord(new DiscordMessage("Content", embeds: new DiscordMessageEmbed[] { null }));
-
-                Assert.Fail("Message successfully sent.");
-            }
-            catch (DiscordWebhookClientException ex)
-            {
-                Assert.IsTrue(ex.Message.Contains("The \"embeds\" cannot have null elements in the array."));
+                Assert.IsTrue(ex.Message.Contains("The \"content\" element length limit is 2000 characters"));
             }
         }
 
@@ -224,7 +209,7 @@ namespace discord_webhook_client_test
             }
             catch (DiscordWebhookClientException ex)
             {
-                Assert.IsTrue(ex.Message.Contains("The embed \"fields\" collection size limit is 25 objects."));
+                Assert.IsTrue(ex.Message.Contains("The embed \"fields\" collection size limit is 25 elements."));
             }
         }
 
@@ -336,12 +321,60 @@ namespace discord_webhook_client_test
         [TestMethod]
         public async Task Should_Send_Messages_With_No_Too_Many_Requests_Error()
         {
-            for (int i = 0; i <= 15; i++)
+            for (int i = 1; i <= 2000; i++)
             {
                 await _client.SendToDiscord(new DiscordMessage("test " + i));
             }
 
             Assert.IsTrue(1 == 1);
+        }
+
+        [TestMethod]
+        public async Task Should_Send_Message_As_Attachment_On_Error()
+        {
+            var message = new DiscordMessage(
+                "Should_Send_Message_As_Attachment_On_Error" + new string('0', 7000),
+                username: "Username",
+                avatarUrl: "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4",
+                tts: false,
+                embeds: new[]
+                {
+                    new DiscordMessageEmbed(
+                        "Embed title " + DiscordEmoji.Thumbsup,
+                        color: 0,
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        url: "https://github.com/jlnpinheiro/discord-webhook-client/",
+                        description: "This is a embed description.",
+                        fields: new[]
+                        {
+                            new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
+                            new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
+                        },
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        image: new DiscordMessageEmbedImage("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4")
+                    ),
+                    new DiscordMessageEmbed(
+                        "Embed title " + DiscordEmoji.Thumbsup,
+                        color: 0,
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        url: "https://github.com/jlnpinheiro/discord-webhook-client/",
+                        description: "This is a embed description.",
+                        fields: new[]
+                        {
+                            new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
+                            new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
+                        },
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        image: new DiscordMessageEmbedImage("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4")
+                    )
+                }
+            );
+
+            await _client.SendToDiscord(message, true);
+
+            Assert.IsTrue(true);
         }
     }
 }
