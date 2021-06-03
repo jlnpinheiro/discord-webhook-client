@@ -321,7 +321,7 @@ namespace discord_webhook_client_test
         [TestMethod]
         public async Task Should_Send_Messages_With_No_Too_Many_Requests_Error()
         {
-            for (int i = 1; i <= 2000; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 await _client.SendToDiscord(new DiscordMessage("test " + i));
             }
