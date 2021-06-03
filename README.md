@@ -66,4 +66,30 @@ await _client.SendToDiscord(message);
 ```
 Look at to your Discord channel...your message is there!
 
+## Sending a message with file attachments
+
+```csharp
+var message = new DiscordMessage(
+    ...
+);
+
+var file1 = new DiscordFile("test1.txt", Encoding.UTF8.GetBytes("This is the first file."));
+
+var file2 = new DiscordFile("test2.txt", Encoding.UTF8.GetBytes("This is the secound file."));
+
+await _client.SendToDiscord(message, new[] { file1, file2 });
+```
+
+## Send message as file attachment on exception
+When an exception is throwing on sending the message, a new message can be sent to Discord with attachments containing message data and exception information.
+
+```csharp
+var message = new DiscordMessage(
+    content: new string('0', 7000), // <-- The content length limit is 2000 characters => Exception is throwing.
+    ...
+);
+
+await _client.SendToDiscord(message, true);
+```
+
 ![A messagem in your Discord channel](../assets/screenshot.png?raw=true)

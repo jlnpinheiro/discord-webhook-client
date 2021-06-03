@@ -143,7 +143,9 @@ namespace JNogueira.Discord.Webhook.Client
 
                         if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                         {
-                            throw new DiscordWebhookClientException($"An error occurred in sending the message: {await response.Content.ReadAsStringAsync()} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}");
+                            var responseContent = await response.Content.ReadAsStringAsync();
+
+                            throw new DiscordWebhookClientException($"An error occurred in sending the message: {responseContent} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}", responseContent, response.StatusCode);
                         }
                     }
                 }
