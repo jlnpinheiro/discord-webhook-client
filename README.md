@@ -66,6 +66,8 @@ await _client.SendToDiscord(message);
 ```
 Look at to your Discord channel...your message is there!
 
+![A messagem in your Discord channel](../assets/screenshot1.png?raw=true)
+
 ## Sending a message with file attachments
 
 ```csharp
@@ -92,4 +94,4 @@ var message = new DiscordMessage(
 await _client.SendToDiscord(message, true);
 ```
 
-![A messagem in your Discord channel](../assets/screenshot.png?raw=true)
+![A messagem in your Discord channel](../assets/screenshot2.png?raw=true)
