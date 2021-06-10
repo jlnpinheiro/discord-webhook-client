@@ -62,7 +62,7 @@ var message = new DiscordMessage(
 );
 
 // Send the message!
-await _client.SendToDiscord(message);
+await client.SendToDiscord(message);
 ```
 Look at to your Discord channel...your message is there!
 
@@ -79,7 +79,7 @@ var file1 = new DiscordFile("test1.txt", Encoding.UTF8.GetBytes("This is the fir
 
 var file2 = new DiscordFile("test2.txt", Encoding.UTF8.GetBytes("This is the secound file."));
 
-await _client.SendToDiscord(message, new[] { file1, file2 });
+await client.SendToDiscord(message, new[] { file1, file2 });
 ```
 
 ## Send message as file attachment on exception
