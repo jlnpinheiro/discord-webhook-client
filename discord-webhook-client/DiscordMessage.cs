@@ -45,7 +45,7 @@ namespace JNogueira.Discord.Webhook.Client
         }
 
         public DiscordMessage(
-            string content,
+            string content = null,
             string username = null,
             string avatarUrl = null,
             bool tts = false,
@@ -62,8 +62,7 @@ namespace JNogueira.Discord.Webhook.Client
 
         internal void Validate()
         {
-            this.NotificarSeNuloOuVazio(this.Content, "The \"content\" element cannot be null or empty.")
-                .NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Content) && this.Content?.Length > 2000, $"The \"content\" element length limit is 2000 characters (actual lenght is {this.Content?.Length}).");
+            this.NotificarSeVerdadeiro(!string.IsNullOrEmpty(this.Content) && this.Content?.Length > 2000, $"The \"content\" element length limit is 2000 characters (actual lenght is {this.Content?.Length}).");
 
             if (this.Embeds?.Length > 0)
             {
