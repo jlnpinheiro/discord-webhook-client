@@ -32,6 +32,37 @@ namespace discord_webhook_client_test
         }
 
         [TestMethod]
+        public async Task Should_Send_Embed_Without_Content()
+        {
+            var message = new DiscordMessage(
+               username: "Username",
+               avatarUrl: "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4",
+               tts: false,
+               embeds: new[]
+               {
+                    new DiscordMessageEmbed(
+                        "Embed title " + DiscordEmoji.Thumbsup,
+                        color: 0,
+                        author: new DiscordMessageEmbedAuthor("Embed 1 author name"),
+                        url: "https://github.com/jlnpinheiro/discord-webhook-client/",
+                        description: "This is a embed description.",
+                        fields: new[]
+                        {
+                            new DiscordMessageEmbedField("Field 1 name", "Field 1 value"),
+                            new DiscordMessageEmbedField("Field 2 name", "Field 2 value")
+                        },
+                        thumbnail: new DiscordMessageEmbedThumbnail("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        image: new DiscordMessageEmbedImage("https://avatars3.githubusercontent.com/u/24236993?s=460&v=4"),
+                        footer: new DiscordMessageEmbedFooter("This is a embed footer text", "https://avatars3.githubusercontent.com/u/24236993?s=460&v=4")
+                    )
+               } 
+           );
+
+            await _client.SendToDiscord(message);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
         public async Task Should_Send_Message_With_Embeds()
         {
             var message = new DiscordMessage(
@@ -99,21 +130,6 @@ namespace discord_webhook_client_test
             await _client.SendToDiscord(message, new[] { file1, file2 });
 
             Assert.IsTrue(true);
-        }
-
-        [TestMethod]
-        public async Task Should_Not_Send_Message_With_Content_Empty()
-        {
-            try
-            {
-                await _client.SendToDiscord(new DiscordMessage(string.Empty));
-
-                Assert.Fail("Message successfully sent.");
-            }
-            catch (DiscordWebhookClientException ex)
-            {
-                Assert.IsTrue(ex.Message.Contains("The \"content\" element cannot be null or empty."));
-            }
         }
 
         [TestMethod]
