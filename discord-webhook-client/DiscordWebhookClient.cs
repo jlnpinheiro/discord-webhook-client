@@ -94,7 +94,10 @@ namespace JNogueira.Discord.Webhook.Client
             try
             {
                 if (files == null || files.Length == 0)
+                {
                     await SendToDiscord(message);
+                    return;
+                }
 
                 if (files.Length > 10)
                     throw new DiscordWebhookClientException($"Files collection size limit is 10 objects. (actual size is {files.Length})");
