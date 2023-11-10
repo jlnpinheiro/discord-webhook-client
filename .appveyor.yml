@@ -32,7 +32,7 @@ build_script:
   - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.1\testSettings.json.enc -secret %my_secret% -salt %my_salt%
   - cmd: dotnet pack
   - cmd: cd discord-webhook-client-test
-  - cmd: dotnet test
+  - cmd: dotnet test --configuration Release --no-build
 artifacts:
   - path: '**\discord-webhook-client*.nupkg'
     name: discord-webhook-client-nuget
