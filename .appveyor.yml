@@ -40,6 +40,7 @@ artifacts:
 deploy:
   # NuGet
   - provider: NuGet
+    symbol_server: https://ci.appveyor.com/nuget/discord-webhook-pxnlqd63xdg0
     api_key:
       secure: +Afmz+25zq9uXNkQOHSYA3o5z4x66rGZTCvsk/DD8arlQbcFw+RRrkiqwUjzAQkq # Encriptada em https://ci.appveyor.com/tools/encrypt
     skip_symbols: false
