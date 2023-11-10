@@ -54,7 +54,7 @@ namespace JNogueira.Discord.Webhook.Client
                                 var jsonBody = JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result.Content.ReadAsStringAsync().Result);
 
                                 if (jsonBody != null)
-                                    System.Threading.Thread.Sleep(jsonBody.RetryAfter + 1);
+                                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
                             }
                         })
                         .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, content));
@@ -139,7 +139,7 @@ namespace JNogueira.Discord.Webhook.Client
                                     var jsonBody = JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result.Content.ReadAsStringAsync().Result);
 
                                     if (jsonBody != null)
-                                        System.Threading.Thread.Sleep(jsonBody.RetryAfter + 1);
+                                        System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
                                 }
                             })
                             .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, formContent));
@@ -235,7 +235,7 @@ namespace JNogueira.Discord.Webhook.Client
         public string Message { get; set; }
 
         [JsonProperty("retry_after")]
-        public int RetryAfter { get; set; }
+        public double RetryAfter { get; set; }
 
         [JsonProperty("global")]
         public bool Global { get; set; }
