@@ -41,7 +41,7 @@ deploy:
   # NuGet
   - provider: NuGet
     api_key:
-      secure: a4SVkFwIJ1khWZoaTG2f+dThjwSPSW+GU+LLaBFuR51hfqrpSMq/MszMjaMC0eVu # Encriptada em https://ci.appveyor.com/tools/encrypt
+      secure: +Afmz+25zq9uXNkQOHSYA3o5z4x66rGZTCvsk/DD8arlQbcFw+RRrkiqwUjzAQkq # Encriptada em https://ci.appveyor.com/tools/encrypt
     skip_symbols: false
     artifact: discord-webhook-client-nuget
 on_success:
