@@ -21,6 +21,8 @@ dotnet_csproj:
   assembly_version: $(APPVEYOR_REPO_TAG_NAME)
   file_version: $(APPVEYOR_REPO_TAG_NAME)
   informational_version: $(APPVEYOR_REPO_TAG_NAME)
+before_build:
+  - nuget restore discord-webhook-client.sln
 build:
   verbosity: minimal
   project: discord-webhook-client.sln
