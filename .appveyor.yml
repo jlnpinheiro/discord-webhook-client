@@ -12,7 +12,8 @@ branches:
 configuration: Release
 install:
   - cmd: echo %APPVEYOR_REPO_TAG_NAME%
-  - cmd: dotnet restore
+  - cmd: dotnet restore discord-webhook-client.sln
+  - cmd: dotnet --list-sdks
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
