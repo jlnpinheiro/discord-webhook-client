@@ -1,6 +1,6 @@
 version: '{build}'
 skip_non_tags: true 
-image: Visual Studio 2017
+image: Visual Studio 2019
 environment:
   my_secret:
     secure: oB6h1YHPdFxVwg7++llRwg== # Encriptada em https://ci.appveyor.com/tools/encrypt
@@ -21,13 +21,10 @@ dotnet_csproj:
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}'
-before_build:
-  - dotnet restore
 build:
   verbosity: minimal
   project: discord-webhook-client.sln
 build_script:
-  - cmd: dotnet restore
   - cmd: dotnet build
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.1\testSettings.json.enc -secret %my_secret% -salt %my_salt%
