@@ -13,18 +13,21 @@ namespace JNogueira.Discord.Webhook.Client
 {
     public class DiscordWebhookClient
     {
-        private string _urlWebhook;
-        
+        private readonly string _urlWebhook;
+        private readonly HttpClient _httpClient;
+
         /// <summary>
         /// A client class to send messages using a Discord webhook.
         /// </summary>
         /// <param name="urlWebhook">The Discord webhook url</param>
-        public DiscordWebhookClient(string urlWebhook)
+        /// <param name="httpClient"></param>
+        public DiscordWebhookClient(string urlWebhook, HttpClient httpClient = null)
         {
             if (string.IsNullOrEmpty(urlWebhook))
                 throw new ArgumentNullException(nameof(urlWebhook), "The Discord webhook url cannot be null or empty.");
 
             _urlWebhook = urlWebhook;
+            _httpClient = httpClient ?? new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
         }
 
         /// <summary>
@@ -43,7 +46,6 @@ namespace JNogueira.Discord.Webhook.Client
                     throw new DiscordWebhookClientException($"The message param is invalid: {string.Join(", ", message.Mensagens)}");
 
                 using (var content = new StringContent(message.ToJson(), Encoding.UTF8, "application/json"))
-                using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
                 {
                     var response = await Policy
                         .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
@@ -57,7 +59,7 @@ namespace JNogueira.Discord.Webhook.Client
                                     System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
                             }
                         })
-                        .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, content));
+                        .ExecuteAsync(async () => await _httpClient.PostAsync(_urlWebhook, content));
 
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
                     {
@@ -128,29 +130,32 @@ namespace JNogueira.Discord.Webhook.Client
                         count++;
                     }
 
-                    using (var client = new HttpClient { Timeout = new TimeSpan(0, 0, 30) })
-                    {
-                        var response = await Policy
-                            .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
-                            .RetryAsync(3, onRetry: (httpResponse, _) =>
-                            {
-                                if ((int)httpResponse.Result.StatusCode == 429) // TOO MANY REQUESTS
-                                {
-                                    var jsonBody = JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result.Content.ReadAsStringAsync().Result);
 
-                                    if (jsonBody != null)
-                                        System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
-                                }
-                            })
-                            .ExecuteAsync(async () => await client.PostAsync(_urlWebhook, formContent));
-
-                        if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
+                    var response = await Policy
+                        .HandleResult<HttpResponseMessage>(x => !x.IsSuccessStatusCode)
+                        .RetryAsync(3, onRetry: (httpResponse, _) =>
                         {
-                            var responseContent = await response.Content.ReadAsStringAsync();
+                            if ((int)httpResponse.Result.StatusCode == 429) // TOO MANY REQUESTS
+                            {
+                                var jsonBody =
+                                    JsonConvert.DeserializeObject<DiscordTooManyRequestsResponse>(httpResponse.Result
+                                        .Content.ReadAsStringAsync().Result);
 
-                            throw new DiscordWebhookClientException($"An error occurred in sending the message: {responseContent} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}", responseContent, response.StatusCode);
-                        }
+                                if (jsonBody != null)
+                                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
+                            }
+                        })
+                        .ExecuteAsync(async () => await _httpClient.PostAsync(_urlWebhook, formContent));
+
+                    if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NoContent)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+
+                        throw new DiscordWebhookClientException(
+                            $"An error occurred in sending the message: {responseContent} - HTTP status code {(int)response.StatusCode} - {response.StatusCode}",
+                            responseContent, response.StatusCode);
                     }
+
                 }
             }
             catch (DiscordWebhookClientException ex)
