@@ -27,7 +27,7 @@ build:
   verbosity: minimal
   project: discord-webhook-client.sln
 build_script:
-  - cmd: nuget restore discord-webhook-client.sln
+  - cmd: dotnet restore
   - cmd: dotnet build
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   - cmd: appveyor-tools\secure-file -decrypt discord-webhook-client-test\bin\Release\netcoreapp2.1\testSettings.json.enc -secret %my_secret% -salt %my_salt%
