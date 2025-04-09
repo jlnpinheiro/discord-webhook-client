@@ -22,7 +22,7 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 before_build:
-  - nuget restore discord-webhook-client.sln
+  - dotnet restore
 build:
   verbosity: minimal
   project: discord-webhook-client.sln
