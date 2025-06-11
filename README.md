@@ -6,7 +6,7 @@ Simple .NET client to send **Discord** (https://discordapp.com/) messages using 
 Reference documentation for creating this client: [Discord Webhooks Guide](https://birdie0.github.io/discord-webhooks-guide/) and [Discord Developer Portal](https://discordapp.com/developers/docs/intro).
 
 ## Target
-.NET Standard 2.0+
+.NET 8.0+
 
 For more information about suported versions visit https://docs.microsoft.com/pt-br/dotnet/standard/net-standard
 
@@ -21,19 +21,22 @@ Install-Package discord-webhook-client
 dotnet add package discord-webhook-client
 ```
 
-## Sending a message...
+## How to send a message?
 Sending a message is very simple!
-- Add reference to namespace ```JNogueira.Discord.Webhook.Client```
-- Create an instance of the class ```DiscordWebhookClient``` with your Discord webhook URL. For more information about how to create a Discord webhook, visit https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
-- Create your ```DiscordMessage``` with all parameters of your message.
-- Send the message!
+- Add reference to namespace ```JNogueira.Discord.WebhookClient```
+- In the Program.cs file add ```service.AddDiscordWebhookClient("Your Discord webhook URL here!")```
+- Get an instance of the class ```DiscordWebhookClient```. For more information about how to create a Discord webhook, visit https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+- Create your ```DiscordMessage``` instance with all parameters of your message.
+- Call ```DiscordWebhookClient.SendToDiscordAsync``` method to send your message to Discord!
 
 ```csharp
 // Add reference to namespace JNogueira.Discord.Webhook.Client
-using JNogueira.Discord.Webhook.Client;
+using JNogueira.Discord.WebhookClient;
 
-// Create an instance of the class DiscordWebhookClient with your Discord webhook URL.
-var client = new DiscordWebhookClient("Your Discord webhook URL here!");
+service.AddDiscordWebhookClient("Your Discord webhook URL where!");
+
+// Get an instance of DiscordWebhookClient
+var discordClient = serviceProvider.GetService<DiscordWebhookClient>();
 
 // Create your DiscordMessage with all parameters of your message.
 var message = new DiscordMessage(
@@ -62,7 +65,7 @@ var message = new DiscordMessage(
 );
 
 // Send the message!
-await client.SendToDiscord(message);
+await discordClient.SendToDiscord(message);
 ```
 Look at to your Discord channel...your message is there!
 
