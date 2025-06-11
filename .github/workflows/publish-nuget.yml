@@ -24,13 +24,9 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Escrever segredo no testSettings.json
+      - name: Write Discord webhook URL on testSettings.json file
         run: |
           echo "{\"DiscordWebhookUrl\": \"${{ vars.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/bin/Release/net8.0/testSettings.json
-
-      - name: Verificar conteúdo do testSettings.json
-        run: |
-          cat discord-webhook-client-test/testSettings.json
 
       - name: Run Tests
         run: dotnet test discord-webhook-client-test/discord-webhook-client-test.csproj --configuration Release --no-build --verbosity normal
