@@ -26,13 +26,7 @@ jobs:
 
       - name: Escrever segredo no testSettings.json
         run: |
-          echo "{\"DiscordWebhookUrl\": \"${{ secrets.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/testSettings.json
-
-      - shell: bash
-        env:
-          SUPER_SECRET: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          echo "{\"DiscordWebhookUrl\": \""$SUPER_SECRET"\"}" > discord-webhook-client-test/testSettings.json
+          echo "{\"DiscordWebhookUrl\": \"${{ vars.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/testSettings.json
 
       - name: Verificar conteúdo do testSettings.json
         run: |
