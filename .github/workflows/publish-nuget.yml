@@ -24,9 +24,17 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Inserir secret no testSettings.json
+      -- name: Inserir secret no testSettings.json
+      --  run: |
+      --    sed -i "s|\"DiscordWebhookUrl\": \"\"|\"DiscordWebhookUrl\": \"${{ secrets.DISCORD_WEBHOOK_URL }}\"|g" discord-webhook-client-test/testSettings.json
+
+      - name: Escrever segredo no testSettings.json
         run: |
-          sed -i "s|\"DiscordWebhookUrl\": \"\"|\"DiscordWebhookUrl\": \"${{ secrets.DISCORD_WEBHOOK_URL }}\"|g" discord-webhook-client-test/testSettings.json
+          echo "{\"DiscordWebhookUrl\": \"${{ secrets.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/testSettings.json
+
+      - name: Verificar conteúdo do testSettings.json
+        run: |
+          cat discord-webhook-client-test/testSettings.json
 
       - name: Run Tests
         run: dotnet test discord-webhook-client-test/discord-webhook-client-test.csproj --configuration Release --no-build --verbosity normal
