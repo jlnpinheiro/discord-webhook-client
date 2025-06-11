@@ -1,0 +1,38 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Ex: v1.0.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Tests
+        run: dotnet test discord-webhook-client-test/discord-webhook-client-test.csproj --configuration Release --no-build --verbosity normal
+
+      - name: Inserir secret no testSettings.json
+        run: |
+          sed -i "s|\"DiscordWebhookUrl\": \"\"|\"DiscordWebhookUrl\": \"${{ secrets.DISCORD_WEBHOOK_URL }}\"|g" discord-webhook-client-test/testSettings.json
+
+      - name: Pack
+        run: dotnet pack discord-webhook-client/discord-webhook-client.csproj --configuration Release --no-build -o ./nupkg /p:PackageVersion=${{ github.ref_name }}
+
+      - name: Publish to NuGet
+        run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

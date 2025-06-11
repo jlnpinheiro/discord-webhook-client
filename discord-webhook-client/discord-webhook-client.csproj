@@ -1,27 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>JNogueira.Discord.Webhook.Client</RootNamespace>
-    <UserSecretsId>8c802d89-a6cb-43df-a09b-c89bb451e5e5</UserSecretsId>
-    <PackageId>discord-webhook-client</PackageId>
-    <Authors>Jorge Nogueira</Authors>
-    <Company />
-    <Product>Discord Webhook Client</Product>
-    <Description>A client class to send messages using a Discord webhook.</Description>
-    <PackageProjectUrl>https://github.com/jlnpinheiro/discord-webhook</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jlnpinheiro/discord-webhook</RepositoryUrl>
-    <PackageTags>discord webhook client embeds fields message</PackageTags>
-    <Version>3.1.1</Version>
-	<PackageVersion>3.1.1</PackageVersion>
-    <PackageReleaseNotes>Bug fix and Discord field limits validations.</PackageReleaseNotes>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NotifiqueMe" Version="3.1.0" />
-     <PackageReference Include="Polly" Version="7.2.0" />
-  </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>JNogueira.Discord.WebhookClient</RootNamespace>
+		<AssemblyName>JNogueira.Discord.WebhookClient</AssemblyName>
+		<PackageId>discord-webhook-client</PackageId>
+		<Authors>Jorge Nogueira</Authors>
+		<Company />
+		<Product>Discord Webhook Client</Product>
+		<Description>A client class to send messages using a Discord webhook.</Description>
+		<PackageProjectUrl>https://github.com/jlnpinheiro/discord-webhook</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/jlnpinheiro/discord-webhook</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>discord webhook client embeds fields message</PackageTags>
+		<Version>4.0.0</Version>
+		<PackageVersion>4.0.0</PackageVersion>
+		<PackageReleaseNotes>Bug fix and Discord field limits validations.</PackageReleaseNotes>
+		<LangVersion>13.0</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.1" />
+		<PackageReference Include="NotifiqueMe" Version="3.1.0" />
+		<PackageReference Include="Polly" Version="8.6.0" />
+	</ItemGroup>
 </Project>
