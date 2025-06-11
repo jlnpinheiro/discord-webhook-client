@@ -398,4 +398,13 @@ public class Tests
 
         Assert.That(!sendMessageOk);
     }
+
+    [TearDown]
+    public void DisposeTest()
+    {
+        _serviceProvider?.Dispose();
+        _serviceCollection = null;
+        _serviceProvider = null;
+        _discordClient = null;
+    }
 }
