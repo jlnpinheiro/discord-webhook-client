@@ -26,7 +26,7 @@ jobs:
 
       - name: Escrever segredo no testSettings.json
         run: |
-          echo "{\"DiscordWebhookUrl\": \"${{ vars.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/testSettings.json
+          echo "{\"DiscordWebhookUrl\": \"${{ vars.DISCORD_WEBHOOK_URL }}\"}" > discord-webhook-client-test/bin/Release/net8.0/testSettings.json
 
       - name: Verificar conteúdo do testSettings.json
         run: |
