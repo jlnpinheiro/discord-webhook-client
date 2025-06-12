@@ -69,7 +69,7 @@ await discordClient.SendToDiscord(message);
 ```
 Look at to your Discord channel...your message is there!
 
-![A messagem in your Discord channel](../assets/screenshot1.png?raw=true)
+![A messagem in your Discord channel](https://raw.githubusercontent.com/jlnpinheiro/discord-webhook-client/refs/heads/assets/screenshot1.png)
 
 ## Sending a message with file attachments
 
@@ -97,4 +97,4 @@ var message = new DiscordMessage(
 await _client.SendToDiscord(message, true);
 ```
 
-![A messagem in your Discord channel](../assets/screenshot2.png?raw=true)
+![A messagem in your Discord channel](https://raw.githubusercontent.com/jlnpinheiro/discord-webhook-client/refs/heads/assets/screenshot2.png)
