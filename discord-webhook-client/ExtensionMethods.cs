@@ -8,7 +8,7 @@ public static class ExtensionMethods
 {
     public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddHttpClient<DiscordWebhookHttpClient>(client =>
+        services.AddHttpClient<DiscordWebhookHttpClient>(nameof(DiscordWebhookHttpClient), client =>
         {
             client.BaseAddress = !string.IsNullOrEmpty(configuration["DiscordWebhookUrl"])
                 ? new Uri(configuration["DiscordWebhookUrl"])
@@ -23,7 +23,7 @@ public static class ExtensionMethods
 
     public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, string urlWebhook)
     {
-        services.AddHttpClient<DiscordWebhookHttpClient>(client =>
+        services.AddHttpClient<DiscordWebhookHttpClient>(nameof(DiscordWebhookHttpClient), client =>
         {
             client.BaseAddress = !string.IsNullOrEmpty(urlWebhook)
                 ? new Uri(urlWebhook)

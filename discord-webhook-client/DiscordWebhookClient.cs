@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -28,7 +27,7 @@ public class DiscordWebhookClient(DiscordWebhookHttpClient client)
 
             HttpContent content;
 
-            if (files?.Any() == true)
+            if (files.Length > 0)
             {
                 var multipart = new MultipartFormDataContent
                 {
@@ -60,7 +59,7 @@ public class DiscordWebhookClient(DiscordWebhookHttpClient client)
                     var jsonBody = await JsonSerializer.DeserializeAsync<DiscordTooManyRequestsResponse>(await httpResponse.Result.Content.ReadAsStreamAsync());
 
                     if (jsonBody is not null)
-                        System.Threading.Thread.Sleep(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
+                        await Task.Delay(TimeSpan.FromSeconds(jsonBody.RetryAfter + 1));
                 }
             });
 
@@ -96,7 +95,7 @@ public class DiscordWebhookClient(DiscordWebhookHttpClient client)
     {
         if (originalMessage is null || exception is null)
             return;
-        
+
         try
         {
             var attachmentMessage = new DiscordMessage(
