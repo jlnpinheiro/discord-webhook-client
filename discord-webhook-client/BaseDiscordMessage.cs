@@ -1,6 +1,5 @@
 ﻿using JNogueira.NotifiqueMe;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace JNogueira.Discord.WebhookClient;
@@ -13,14 +12,14 @@ public abstract class BaseDiscordMessage : INotificavel
     public bool IsInvalid => Invalido;
 
     [JsonIgnore]
-    public bool Invalido => _notificacoes.Any();
+    public bool Invalido => _notificacoes.Count != 0;
 
     [JsonIgnore]
     public IReadOnlyCollection<string> Mensagens
     {
         get
         {
-            return !_notificacoes.Any()
+            return _notificacoes.Count == 0
                 ? []
                 : (IReadOnlyCollection<string>)_notificacoes.ConvertAll(x => x.Mensagem);
         }
@@ -43,7 +42,7 @@ public abstract class BaseDiscordMessage : INotificavel
 
     public void AdicionarNotificacoes(IReadOnlyCollection<Notificacao> notificacoes)
     {
-        if (notificacoes?.Any() == true)
+        if (notificacoes.Count > 0)
         {
             _notificacoes.AddRange(notificacoes);
         }
