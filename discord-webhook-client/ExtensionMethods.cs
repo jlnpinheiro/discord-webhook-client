@@ -6,7 +6,7 @@ namespace JNogueira.Discord.WebhookClient;
 
 public static class ExtensionMethods
 {
-    public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, IConfiguration configuration, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
         services.AddHttpClient<DiscordWebhookHttpClient>(nameof(DiscordWebhookHttpClient), client =>
         {
@@ -16,12 +16,23 @@ public static class ExtensionMethods
             client.Timeout = TimeSpan.FromSeconds(30);
         });
 
-        services.AddScoped<DiscordWebhookClient>();
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services.AddSingleton<DiscordWebhookClient>();
+                break;
+            case ServiceLifetime.Transient:
+                services.AddTransient<DiscordWebhookClient>();
+                break;
+            default:
+                services.AddScoped<DiscordWebhookClient>();
+                break;
+        }
 
         return services;
     }
 
-    public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, string urlWebhook)
+    public static IServiceCollection AddDiscordWebhookClient(this IServiceCollection services, string urlWebhook, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
         services.AddHttpClient<DiscordWebhookHttpClient>(nameof(DiscordWebhookHttpClient), client =>
         {
@@ -31,7 +42,18 @@ public static class ExtensionMethods
             client.Timeout = TimeSpan.FromSeconds(30);
         });
 
-        services.AddScoped<DiscordWebhookClient>();
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services.AddSingleton<DiscordWebhookClient>();
+                break;
+            case ServiceLifetime.Transient:
+                services.AddTransient<DiscordWebhookClient>();
+                break;
+            default:
+                services.AddScoped<DiscordWebhookClient>();
+                break;
+        }
 
         return services;
     }
