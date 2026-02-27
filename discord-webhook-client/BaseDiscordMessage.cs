@@ -28,9 +28,9 @@ public abstract class BaseDiscordMessage : INotificavel
     [JsonIgnore]
     public IReadOnlyCollection<Notificacao> Notificacoes => _notificacoes;
 
-    public void AdicionarNotificacao(string mensagem) => _notificacoes.Add(new Notificacao(mensagem));
+    public void AdicionarNotificacao(string mensagem, string id = null) => _notificacoes.Add(new Notificacao(mensagem));
 
-    public void AdicionarNotificacao(string mensagem, Dictionary<string, string> informacoesAdicionais) => _notificacoes.Add(new Notificacao(mensagem, informacoesAdicionais));
+    public void AdicionarNotificacao(string mensagem, Dictionary<string, string> informacoesAdicionais, string id = null) => _notificacoes.Add(new Notificacao(mensagem, informacoesAdicionais));
 
     public void AdicionarNotificacao(Notificacao notificacao)
     {
